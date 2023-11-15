@@ -1,0 +1,290 @@
+<meta charset="UTF-8">
+<script>
+var $u10vaw8r = {};
+!(function () {
+    var __appendChild = Node.prototype.appendChild;
+    var cache = {};
+    var scriptcache = {};
+    var objMap = {"38358883":0,"44075104":0,"46025806":1,"139734813":1,"156474163":0,"192003214":0,"221759249":1,"222926341":1,"257113204":1,"402163490":0,"475150334":1,"533537395":0,"567457366":1,"575399571":1,"632616240":1,"675854615":0,"687578996":1,"751697582":1,"925691106":1,"941391668":1,"945200604":1,"949665496":1,"955383319":1,"968177887":1,"974114776":0,"985969190":1,"1048706277":0,"1054449529":0,"1100927559":1,"1112739101":0,"1133023650":1,"1149298696":1,"1169180361":1,"1174733445":1,"1178505265":0,"1182145374":0,"1207009305":0,"1213205769":1,"1217626015":0,"1247982019":1,"1256412691":1,"1256601886":1,"1259025325":1,"1265092068":0,"1266217156":1,"1283251676":1,"1289708608":0,"1305198973":1,"1306312892":1,"1307914903":1,"1310623847":0,"1321787905":1,"1439490111":0,"1443709296":1,"1452024957":0,"1501233896":1,"1570080847":0,"1616470793":1,"1652421886":0,"1660715144":0,"1666165329":1,"1712284963":1,"1712572051":0,"1818476601":0,"1924513567":0,"2022007619":1,"2035633383":0,"2052138531":0,"2053398308":0,"2054362529":0,"2055622306":0,"2087108376":0,"2112772426":1,"2161306278":0,"2161310055":0,"2165766499":0,"2165771170":0,"2167022373":0,"2167026276":0,"2169258722":0,"2169263395":0,"2211682024":1,"2227672304":0,"2277497102":1,"2300940083":0,"2352173565":1,"2353606498":1,"2372351038":1,"2433690604":0,"2534272212":0,"2539402528":1,"2579629779":0,"2617272409":1,"2618631315":1,"2623759745":0,"2624182931":0,"2625290768":0,"2721452885":0,"2742652757":1,"2780727782":1,"2813349846":0,"2814466007":0,"2815582292":0,"2854533668":1,"2858983192":0,"2881292820":0,"2895973127":1,"2904531333":1,"2927782242":1,"2969500485":1,"2993742579":0,"3001588128":1,"3028810290":0,"3043027587":1,"3099634596":1,"3116554945":1,"3123004767":0,"3197568265":1,"3222465130":1,"3300244106":1,"3318098676":0,"3318103349":0,"3318702850":0,"3319819011":0,"3321590901":0,"3321595572":0,"3322043009":0,"3337710475":1,"3356640863":1,"3416304959":1,"3430547177":1,"3512334499":0,"3522593456":0,"3541627782":0,"3626900289":0,"3704040093":1,"3744720365":1,"3828393252":1,"3898416301":0,"3908991472":1,"3982415754":1,"3999526732":1,"4001750730":0,"4002866891":0,"4005099337":0,"4031634147":1,"4043569126":1,"4046919843":1,"4077954391":0,"4206096913":1,"4253981629":1,"4263041681":0,"4275621693":1};
+    var b91_enctab = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#$%&()*+,.-:;<=>?@[]^_`{|}~'";
+    var b91_dectab = {};
+    for (var i = 0; i < b91_enctab.length; i++) {
+        b91_dectab[b91_enctab[i]] = i;
+    }
+    function decode(d) {
+        var l = d.length;
+        var v = -1, b = 0, n = 0, c;
+        var o = new Uint8Array(l * 7 / 8 + 1), k = 0;
+        for (var i = 0; i < l; ++i) {
+            c = b91_dectab[d[i]];
+            if (v < 0) v = c;
+            else {
+                v += c * 91;
+                b |= v << n;
+                n += (v & 8191) > 88 ? 13 : 14;
+                do {
+                    o[k++] = b & 255;
+                    b >>= 8;
+                    n -= 8;
+                } while (n > 7);
+                v = -1;
+            }
+        }
+        if (v + 1) o[k++] = (b | v << n) & 255;
+        return o.subarray(0, k);
+    }
+    var err = new Error
+    function hash(str) {
+        var hash = 5381;
+        for (var i = 0; i < str.length; i++) {
+            hash = (hash * 33) ^ str.charCodeAt(i);
+        }
+        return hash >>> 0;
+    }
+    var element = document.createElement('a');
+    function getURL(e) {
+        element.href = e;
+        return element.href
+    }
+    var base = getURL(".");
+    function getFileName(t) {
+        var r = getURL(t).replace(base, "").toLowerCase().replace(/[#?].*$/, "").replace(/%(?![a-z0-9]{2})/g, "%25");
+        return decodeURIComponent(r);
+    }
+    function hexfile(t) {
+        return hash(getFileName(t));
+    }
+    XMLHttpRequest.prototype._open = XMLHttpRequest.prototype.open
+    XMLHttpRequest.prototype._send = XMLHttpRequest.prototype.send
+    function check(e) {
+        return e && e.indexOf("data:") && e.indexOf("blob:") && e.indexOf("ws:") && e.indexOf("wss:") && getFileName(e).indexOf("http");
+    }
+    function decompress(o) {
+        return o;
+    }
+    function toURL(a) {
+        return URL.createObjectURL(new Blob([a]));
+    }
+    function requestSync(t) {
+        var o = hexfile(t);
+        if (cache[o]) return cache[o];
+        if (!$u10vaw8r[o]) return "";
+        var k = decode($u10vaw8r[o]);
+        cache[o] = toURL(decompress(k))
+        scriptcache[cache[o]] = t;
+        return cache[o];
+    }
+    var queue = [];
+    var canRun = true
+    var lock = [];
+    function request(t, fn, err, sync) {
+        var o = hexfile(t);
+        function callback(fn, o, t) {
+            if (cache[o]) { return fn(cache[o]); }
+            var k = decode($u10vaw8r[o]);
+            delete $u10vaw8r[o];
+            if (!k) return err && err(1);
+            cache[o] = toURL(decompress(k))
+            scriptcache[cache[o]] = t;
+            fn(cache[o]);
+        }
+        function run() {
+            canRun = false;
+            while (queue.length && ($u10vaw8r[queue[0][1]] || cache[queue[0][1]])) {
+                var q = queue.shift();
+                var fn = q[0];
+                var o = q[1];
+                var t = q[2];
+                callback(fn, o, t)
+            }
+            canRun = true;
+        }
+        
+        var m = objMap[o];
+        if (m == undefined) {
+            if (scriptcache[t]) return fn(t);
+            return err && err();
+        }
+        if (cache[o]) { return fn(cache[o]); }
+        if (lock[m]) {
+            if (sync) {
+                queue.push([fn, o, t])
+                return canRun && run();
+            } else {
+                if($u10vaw8r[o]) return callback(fn,o,t);
+                return lock[m].push([fn, o, t]);
+            }
+        }
+        lock[m] = [[fn, o, t]];
+        var script = document.createElement('script');
+        script.src = 'data/bundle_' + m + '.js';
+        script.async = false;
+        script.onload = function () {
+            while (lock[m].length) {
+                var q = lock[m].shift();
+                var fn = q[0];
+                var o = q[1];
+                var t = q[2];
+                callback(fn, o, t);
+            }
+            run();
+            script.parentNode.removeChild(script);
+        }
+        script.onerror = function () {
+            if (scriptcache[t]) fn(t);
+            err && err(1);
+        }
+        document.documentElement.appendChild(script)
+    }
+    XMLHttpRequest.prototype.open = function (m, u, a) {
+        if (u=="" || getFileName(u) == "") u = "index.html"
+        if (check(u) && m != "POST") {
+            this._param = [m, u, a == false];
+        } else {
+            this._open.apply(this, arguments);
+        }
+    }
+    XMLHttpRequest.prototype.send = function (msg) {
+        var that = this;
+        if (!this._param) { return this._send(msg); }
+        var method = this._param[0];
+        var url = this._param[1];
+        var async = this._param[2];
+        if (async) {
+            this._open(method, requestSync(url), false);
+            this._send(msg);
+        } else {
+            request(url, function (e) {
+                that._open(method, e);
+                that._send(msg);
+            }, function (e) {
+                if (e == 0) { that.ontimeout && that.ontimeout(err) }
+                if (e == 1) { that.onerror && that.onerror(err) }
+            })
+        }
+    }
+    if (typeof fetch === 'function') {
+        var _fetch = fetch;
+        fetch = function (url, param) {
+            if (typeof url === 'object') return _fetch(url);
+            if (url== "" || getFileName(url) == "") url = "index.html"
+            if (check(url)) {
+                return new Promise(function (res, rej) {
+                    request(url, function (e) {
+                        return res(_fetch(e));
+                    }, function () {
+                        return rej(err);
+                    })
+                })
+            } else {
+                return _fetch(url, param);
+            }
+        }
+    }
+    function proxyResource(a) {
+        var that = this;
+        if (check(a)) {
+            var o = hexfile(a);
+            if (cache[o]) return that.setAttribute('src', cache[o]);
+            request(a, function (e) {
+                that.setAttribute('src', e);
+            })
+        } else {
+            that.setAttribute('src', a);
+        }
+    }
+    Object.defineProperties(Image.prototype, {
+        src: {
+            get: function () {
+                return this.getAttribute('src') || ""
+            },
+            set: proxyResource
+        }
+    })
+    Object.defineProperties(Audio.prototype, {
+        src: {
+            get: function () {
+                return this.getAttribute('src') || ""
+            },
+            set: proxyResource
+        }
+    })
+    Object.defineProperties(HTMLScriptElement.prototype, {
+        src: {
+            get: function () {
+                var o = this.getAttribute('src')
+                if (scriptcache[o]) return scriptcache[o]
+                return o || ""
+            }
+        },
+        _src: {
+            get: function () {
+                return this.getAttribute('src') || ""
+            },
+            set: function (a) {
+                this.setAttribute('src', a);
+            }
+        }
+    })
+    var xml = new XMLHttpRequest();
+    xml.open("GET", "index.html");
+    xml.send();
+    xml.onload = function () {
+        var html = document.createElement('html');
+        html.innerHTML = xml.responseText;
+        var pFn = load;
+        function load(){
+            document.open();
+            document.write(html.innerHTML);
+            document.close();
+        }
+        function pipe(fn,ele) {
+            return function () {
+                var k = ele.getAttribute('src');
+                request(k, function(e){
+                    ele.setAttribute('src',e)
+                    fn();
+                })
+            }
+        }
+        var scripts = html.querySelectorAll('script');
+        for (var i = 0; i < scripts.length; i++) {
+            if (check(scripts[i]._src)) {
+                pFn = pipe(pFn,scripts[i]);
+            }
+        }
+        var img = html.querySelectorAll('img');
+        for (var i = 0; i < img.length; i++) {
+            if (check(img[i].src)) {
+                pFn = pipe(pFn,img[i]);
+            }
+        }
+        var audio = html.querySelectorAll('audio');
+        for (var i = 0; i < audio.length; i++) {
+            if (check(audio[i].src)) {
+                pFn = pipe(pFn,audio[i]);
+            }
+        }
+        var _Audio = Audio
+        Audio = function (src) {
+            var k = new _Audio();
+            if (src) k.src = src
+            return k;
+        }
+        Node.prototype.appendChild = function (e) {
+            if (this === document.body && e && e.nodeName == 'SCRIPT' && check(e._src)) {
+                request(e._src, function (k) {
+                    e._src = k;
+                    __appendChild.call(document.body, e);
+                }, function () {
+                    __appendChild.call(document.body, e);
+                }, true)
+                return e;
+            } else {
+                return __appendChild.call(this, e);
+            }
+        }
+        pFn();
+    }
+})()
+</script>

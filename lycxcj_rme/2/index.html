@@ -1,0 +1,30 @@
+<meta charset="UTF-8">
+<body>
+    <script>
+        (function () {
+            var xor = function (a, buf) {
+                a = a.split("").map(function (v) { return v.charCodeAt(0) })
+                for (var i = 0, j = 0; j < buf.length; j++) {
+                    buf[j] ^= a[i++] ^ j;
+                    if (i == a.length) i = 0;
+                }
+            }
+            function init() {
+                xhr = new XMLHttpRequest();
+                xhr.open("GET", "index.js");
+                xhr.responseType = "arraybuffer";
+                xhr.onload = function () {
+                    var x = new Uint8Array(xhr.response);
+                    xor("\x1B9M@0", x);
+                    var str = String.fromCharCode.apply(null, x);
+                    var script = document.createElement('script');
+                    script.text = str;
+                    document.body.appendChild(script);
+                }
+                xhr.onerror = onerror = function () { document.write("文件打开错误"); }
+                xhr.send();
+            }
+            init()
+        })();
+    </script>
+</body>
