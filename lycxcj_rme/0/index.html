@@ -15,7 +15,7 @@
         }
         if (location.href[0] === 'f') { (html.innerHTML = "<h1>请勿直接打开html！请到网站上进行游戏<br>如果想离线游玩，请设置本地服务器localhost server<br>Ajax不能通过file协议工作。这是您浏览器的限制，不是该脚本的限制</h1>"); return }
         if (location.href.slice(-1) !== "/") location.href = "."
-        window.hash = localStorage['pw:mdy2TOmVDHxWwtOD'];
+        window.hash = localStorage['pw:MQgKPxOQ6tPRLJfk'];
         if (!hash) { hash = prompt('该文件已被加密，请输入密码'); }
         if (!hash) { show("无效密码"); return; }
         var xhr = new XMLHttpRequest();
@@ -26,12 +26,12 @@
             var x = new Uint8Array(xhr.response);
             xor(md5.array(document.scripts[0].text + hash), x);
             var str = String.fromCharCode.apply(null, x);
-            if(/[\x00-\x08\x0b-\x0c\x0e-\x1f\x80-\xff]/.test(str)) {localStorage.removeItem('pw:mdy2TOmVDHxWwtOD');show("密码错误");return}
-            if(!localStorage['pw:mdy2TOmVDHxWwtOD']) alert("密码正确，请耐心等待");
-            localStorage['pw:mdy2TOmVDHxWwtOD'] = hash;
+            if(/[\x00-\x08\x0b-\x0c\x0e-\x1f\x80-\xff]/.test(str)) {localStorage.removeItem('pw:MQgKPxOQ6tPRLJfk');show("密码错误");return}
+            if(!localStorage['pw:MQgKPxOQ6tPRLJfk']) alert("密码正确，请耐心等待");
+            localStorage['pw:MQgKPxOQ6tPRLJfk'] = hash;
             var script = document.createElement('script');
             script.text = str;
-            onerror = function(){localStorage.removeItem('pw:mdy2TOmVDHxWwtOD');show("密码错误");}
+            onerror = function(){localStorage.removeItem('pw:MQgKPxOQ6tPRLJfk');show("密码错误");}
             html.appendChild(script);
         }
     }
